@@ -1,4 +1,4 @@
-const { python } = require("compile-run");
+const { python, java } = require("compile-run");
 
 const lang = {
   PYTHON: "python",
@@ -10,13 +10,13 @@ const lang = {
 };
 
 const compileCode = async (req, res) => {
-  const { sourceCode, input, language = "python" } = req.body;
+  const { sourceCode, input, language = "java" } = req.body;
 
   if (!sourceCode) {
     return res.status(500).json({ message: "Please type something to start" });
   }
 
-  if (language == lang.PYTHON) {
+  if (language === lang.PYTHON) {
     const resultPromise = python.runSource(sourceCode, { stdin: input });
     resultPromise
       .then((result) => {
@@ -27,8 +27,8 @@ const compileCode = async (req, res) => {
         console.log(err);
         res.status(500).json(err);
       });
-  } else if (language == lang.JAVA) {
-    const resultPromise = python.runSource(sourceCode, { stdin: input });
+  } else if (language === lang.JAVA) {
+    const resultPromise = java.runSource(sourceCode, { stdin: input });
     resultPromise
       .then((result) => {
         console.log(result);

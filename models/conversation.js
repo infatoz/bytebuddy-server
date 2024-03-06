@@ -29,5 +29,6 @@ const ConversationSchema = new Schema({
 });
 
 const Conversation = mongoose.model("Conversation", ConversationSchema);
+const History = mongoose.model("History", HistorySchema);
 
-module.exports = Conversation;
+module.exports = { Conversation, History };
